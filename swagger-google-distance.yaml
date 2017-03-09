@@ -1,0 +1,73 @@
+--- 
+swagger: "2.0"
+host: maps.googleapis.com
+info: 
+  description: use tradeit api
+  title: tradeit api
+  version: 1.0.0
+basePath: /maps/api/
+schemes:
+  - https
+paths: 
+  /directions/json:
+    get:
+      summary:  get directions from a to b
+      description: get directions
+      operationId: getDirections
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: origin
+          in: query
+          description: The origin
+          type: string
+          required: true
+        - name: destination
+          in: query
+          description: destination
+          type: string
+          required: true
+        - name: key 
+          in: query
+          description: apikey
+          type: string
+          required: true
+        - name: language
+          in: query
+          description: language
+          type: string
+          required: false
+        
+      responses:
+        200:
+          description: OK
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+definitions:
+  apiKey:
+    type: object
+    properties:
+      apiKey: 
+        type: string
+        default: tradeit-test-api-key
+      broker:
+        type: string
+        default: Dummy
+
+  errorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+
+
+ 
